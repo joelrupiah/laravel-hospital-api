@@ -39,6 +39,7 @@ class RoleController extends Controller
         }
 
         $role = Role::create([
+            'guard_name' => 'doctor',
             'name' => $request->name
         ]);
 

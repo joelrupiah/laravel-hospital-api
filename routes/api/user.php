@@ -24,6 +24,11 @@ Route::group( ['prefix' => 'admin','middleware' => ['auth:admin-api','scopes:adm
     // Route::resource('roles', RoleController::class);
 });
 
+Route::post('admin/create-doctor',[UserController::class, 'createDoctor']);
+Route::post('admin/update-doctor/{id}',[UserController::class, 'updateDoctor']);
+Route::get('admin/get-doctors',[UserController::class, 'getDoctors']);
+Route::get('admin/get-doctor/{id}',[UserController::class, 'getSpecificDoctor']);
+
 Route::get('admin/get-permissions', [PermissionController::class, 'index']);
 Route::get('admin/get-permission/{id}', [PermissionController::class, 'show']);
 Route::post('admin/create-permission', [PermissionController::class, 'store']);

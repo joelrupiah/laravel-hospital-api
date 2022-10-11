@@ -36,6 +36,7 @@ class PermissionController extends Controller
         }
 
         $this->permission->create([
+            'guard_name' => 'doctor',
             'name' => $request->name
         ]);
 
