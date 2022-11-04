@@ -52,17 +52,17 @@ class AuthController extends Controller
             return response()->json(['error' => $validator->errors()->all()]);
         }
 
-        if(auth()->guard('doctor')->attempt(['email' => request('email'), 'password' => request('password')])){
+        if(auth()->guard('admin')->attempt(['email' => request('email'), 'password' => request('password')])){
 
-            config(['auth.guards.api.provider' => 'doctor']);
+            config(['auth.guards.api.provider' => 'admin']);
             
-            $doctor = Doctor::select('doctors.*')->find(auth()->guard('doctor')->user()->id);
+            $doctor = Doctor::select('doctors.*')->find(auth()->guard('admin')->user()->id);
             $success =  $doctor;
-            $success['token'] =  $doctor->createToken('MyApp',['doctor'])->accessToken; 
+            $success['token'] =  $doctor->createToken('MyApp',['admin'])->accessToken; 
 
             return response()->json($success, 200);
         }else{ 
-            return response()->json(['error' => ['Email and Password are Wrong.']], 200);
+            return response()->json(['error' => ['Email and Password are Wrong.']], 401);
         }
     }
 }
